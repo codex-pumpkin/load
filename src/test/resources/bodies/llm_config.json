@@ -1,0 +1,6 @@
+{
+  "name": "#{randomAlphanumeric(16)}",
+  "model_name": "#{randomAlphanumeric(16)}",
+  "api_url": "https://#{randomAlphanumeric(16)}.com",
+  "api_key": "#{randomAlphanumeric(16)}"
+}

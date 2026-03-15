@@ -34,9 +34,9 @@ class Authentication extends BaseSimulation {
     .exec(getProfilePicture)
     .exec(getOwnData)
 
-  //addScenario(accountCreateScenario)
-  //addScenario(refreshScenario)
-  //addScenario(changeAccountDataScenario)
+  addScenario(accountCreateScenario)
+  addScenario(refreshScenario)
+  addScenario(changeAccountDataScenario)
 
   setup()
 

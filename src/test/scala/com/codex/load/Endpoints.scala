@@ -131,6 +131,27 @@ object Endpoints {
     .check(jsonPath("$.access_token").saveAs("accessToken"))
     .check(jsonPath("$.refresh_token").saveAs("refreshToken")))
 
+  /**
+   * Request to GET /quota
+   */
+  val getQuota: HttpRequestBuilder = withBearerAuth(http("Get server quota")
+  .get("/quota")
+  .check(status is 200))
+
+  /**
+   * Request to PUT /quota
+   */
+  val updateQuota: HttpRequestBuilder = withBearerAuth(http("Update server quota")
+  .put("/quota")
+    .body(ElFileBody("bodies/quota.json"))
+  .check(status is 200))
+
+  val getAnalytics: HttpRequestBuilder = withBearerAuth(http("Get analytics")
+  .get("/analytics"))
+    .queryParam("period_of_days", 4)
+    .queryParam("time_interval_minutes", 69)
+    .check(status is 200)
+
   def randomAlphanumeric(length: Int): String = {
     val chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     val random = new scala.util.Random

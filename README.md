@@ -29,6 +29,8 @@ To run the test, execute the `start.py` script:
 python3 start.py
 ```
 
+For the tests to work, the `EMAIL_VERIFICATION_REQUIRED` environment variable for the server must be set to `false`.
+
 ## Environment parameters
 
 The following environment parameters are mandatory.

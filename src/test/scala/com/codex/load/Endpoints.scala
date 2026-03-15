@@ -25,8 +25,8 @@ object Endpoints {
    * Request to POST /auth/login with admin credentials
    */
   val loginAsAdmin: ChainBuilder = exec { session =>
-    session.set("email", System.getProperty("adminEmail"))
-      .set("password", System.getProperty("adminPassword"))
+    session.set("email", System.getenv("CODEX_LOAD_ADMIN_EMAIL"))
+      .set("password", System.getenv("CODEX_LOAD_ADMIN_PASSWORD"))
       .success
   }.exec(http("Login as Admin")
     .post("/auth/login")
@@ -151,6 +151,30 @@ object Endpoints {
     .queryParam("period_of_days", 4)
     .queryParam("time_interval_minutes", 69)
     .check(status is 200)
+
+  val createConversation: ChainBuilder = exec { session =>
+    session
+      .set("llmId", System.getProperty("llmId"))
+  }.exec(
+    withBearerAuth(http("Create conversation")
+      .post("/conversations")
+      .body(ElFileBody("bodies/conversation.json")))
+      .check(status is 200)
+      .check(jsonPath("$.id").saveAs("conversationId")))
+
+  val updateConversation: HttpRequestBuilder = withBearerAuth(http("Update conversation")
+      .put("/conversations/#{conversationId}")
+      .body(ElFileBody("bodies/update_conversation.json")))
+      .check(status is 200)
+
+  val deleteConversation: HttpRequestBuilder = withBearerAuth(http("Delete conversation")
+      .delete("/conversations/#{conversationId}")
+      .check(status is 200))
+
+  val addMessage: HttpRequestBuilder = withBearerAuth(http("Add message")
+      .post("/conversations/#{conversationId}/messages")
+    .body(ElFileBody("bodies/message.json"))
+      .check(status is 200))
 
   def randomAlphanumeric(length: Int): String = {
     val chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

@@ -1,0 +1,4 @@
+{
+  "name": "#{randomAlphanumeric(12)}",
+  "pinned": true
+}

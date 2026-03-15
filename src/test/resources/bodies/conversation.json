@@ -1,0 +1,6 @@
+{
+  "message": "#{randomAlphanumeric(32)}",
+  "llm_model_config_id": "#{llmId}",
+  "target_language": "spice_netlist",
+  "name": "#{randomAlphanumeric(12)}"
+}

@@ -1,0 +1,3 @@
+{
+  "message": "#{randomAlphanumeric(32)}"
+}

@@ -17,7 +17,7 @@ abstract class BaseSimulation extends Simulation {
    * The usual protocol that connects to a localhost-running instance.
    */
   protected val httpProtocol: HttpProtocolBuilder = http
-    .baseUrl(System.getProperty("baseUrl"))
+    .baseUrl(System.getenv("CODEX_LOAD_BASE"))
     .acceptHeader("application/json")
     .contentTypeHeader("application/json")
 
